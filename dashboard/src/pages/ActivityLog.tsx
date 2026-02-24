@@ -33,18 +33,22 @@ export default function ActivityLog() {
 
   useEffect(() => {
     async function fetchActivities() {
-      let query = supabase
-        .from('activity_log')
-        .select('*')
-        .order('created_at', { ascending: false })
-        .limit(100);
+      try {
+        let query = supabase
+          .from('activity_log')
+          .select('*')
+          .order('created_at', { ascending: false })
+          .limit(100);
 
-      if (filter !== 'all') {
-        query = query.eq('action', filter);
+        if (filter !== 'all') {
+          query = query.eq('action', filter);
+        }
+
+        const { data } = await query;
+        setActivities(data || []);
+      } catch {
+        // Supabase not connected
       }
-
-      const { data } = await query;
-      setActivities(data || []);
     }
     fetchActivities();
   }, [filter]);

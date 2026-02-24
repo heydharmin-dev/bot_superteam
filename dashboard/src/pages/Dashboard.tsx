@@ -23,18 +23,22 @@ export default function Dashboard() {
 
   useEffect(() => {
     async function fetchData() {
-      const { count: total } = await supabase.from('members').select('*', { count: 'exact', head: true });
-      const { count: pending } = await supabase.from('members').select('*', { count: 'exact', head: true }).eq('intro_status', 'pending');
-      const { count: completed } = await supabase.from('members').select('*', { count: 'exact', head: true }).eq('intro_status', 'completed');
-      const { count: approved } = await supabase.from('members').select('*', { count: 'exact', head: true }).eq('intro_status', 'approved');
-      setStats({ total: total || 0, pending: pending || 0, completed: completed || 0, approved: approved || 0 });
+      try {
+        const { count: total } = await supabase.from('members').select('*', { count: 'exact', head: true });
+        const { count: pending } = await supabase.from('members').select('*', { count: 'exact', head: true }).eq('intro_status', 'pending');
+        const { count: completed } = await supabase.from('members').select('*', { count: 'exact', head: true }).eq('intro_status', 'completed');
+        const { count: approved } = await supabase.from('members').select('*', { count: 'exact', head: true }).eq('intro_status', 'approved');
+        setStats({ total: total || 0, pending: pending || 0, completed: completed || 0, approved: approved || 0 });
 
-      const { data: activity } = await supabase
-        .from('activity_log')
-        .select('*')
-        .order('created_at', { ascending: false })
-        .limit(10);
-      setRecentActivity(activity || []);
+        const { data: activity } = await supabase
+          .from('activity_log')
+          .select('*')
+          .order('created_at', { ascending: false })
+          .limit(10);
+        setRecentActivity(activity || []);
+      } catch {
+        // Supabase not connected — show empty state
+      }
     }
     fetchData();
   }, []);

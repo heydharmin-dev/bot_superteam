@@ -20,13 +20,17 @@ export default function Settings() {
 
   useEffect(() => {
     async function fetchSettings() {
-      const { data: settings } = await supabase.from('settings').select('*');
-      if (settings) {
-        for (const s of settings) {
-          if (s.key === 'enforcement_mode') setEnforcementMode(s.value);
-          if (s.key === 'welcome_message') setWelcomeMessage(s.value);
-          if (s.key === 'intro_example') setIntroExample(s.value);
+      try {
+        const { data: settings } = await supabase.from('settings').select('*');
+        if (settings) {
+          for (const s of settings) {
+            if (s.key === 'enforcement_mode') setEnforcementMode(s.value);
+            if (s.key === 'welcome_message') setWelcomeMessage(s.value);
+            if (s.key === 'intro_example') setIntroExample(s.value);
+          }
         }
+      } catch {
+        // Supabase not connected
       }
     }
     fetchSettings();

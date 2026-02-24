@@ -33,11 +33,15 @@ export default function Members() {
   const [search, setSearch] = useState('');
 
   const fetchMembers = async () => {
-    const { data } = await supabase
-      .from('members')
-      .select('*')
-      .order('joined_at', { ascending: false });
-    setMembers(data || []);
+    try {
+      const { data } = await supabase
+        .from('members')
+        .select('*')
+        .order('joined_at', { ascending: false });
+      setMembers(data || []);
+    } catch {
+      // Supabase not connected
+    }
   };
 
   useEffect(() => { fetchMembers(); }, []);

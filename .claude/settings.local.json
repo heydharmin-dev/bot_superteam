@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(npm install:*)",
+      "Bash(git init:*)",
+      "Bash(git -C /Users/heydharmin/Desktop/bot_superteam status)",
+      "Bash(git -C /Users/heydharmin/Desktop/bot_superteam log --oneline -5)",
+      "Bash(git -C /Users/heydharmin/Desktop/bot_superteam diff --staged)",
+      "Bash(git -C /Users/heydharmin/Desktop/bot_superteam add bot/package.json bot/package-lock.json bot/.env.example bot/src/config.js bot/.gitignore)",
+      "Bash(git -C /Users/heydharmin/Desktop/bot_superteam diff --staged --stat)",
+      "Bash(git -C /Users/heydharmin/Desktop/bot_superteam log --oneline -10)",
+      "Bash(npm create vite:*)",
+      "Bash(node -e:*)",
+      "Bash(npx tsc:*)"
+    ]
+  }
+}
