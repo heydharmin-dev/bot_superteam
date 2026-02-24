@@ -34,6 +34,9 @@ CREATE TABLE IF NOT EXISTS settings (
 -- Seed default settings
 INSERT INTO settings (key, value) VALUES
   ('enforcement_mode', '"mute"'),
+  ('bot_token', '""'),
+  ('main_group_id', '""'),
+  ('intro_channel_id', '""'),
   ('welcome_message', '"👋 Welcome to Superteam MY!\n\nTo get started, please introduce yourself in the Intro Channel using this format 👇\n\nThis helps everyone get context and makes collaboration easier.\n\n📝 Intro format:\n• Who are you & what do you do?\n• Where are you based?\n• One fun fact about you\n• How are you looking to contribute to Superteam MY?\n\nNo pressure to be perfect — just be you!"'),
   ('intro_example', '"✨ Example intro\n\nHey everyone! I''m Marianne 👋\nTogether with Han, we are Co-Leads of Superteam Malaysia!\n\n📍 Based in Kuala Lumpur and Network School\n🧑‍🎓 Fun fact: My first Solana project was building an AI Telegram trading bot, and that''s how I found myself in Superteam MY!\n🤝 Looking to contribute by:\n• Connecting builders with the right mentors, partners, and opportunities\n• Helping teams refine their story, demos, and go-to-market\n• Supporting members who want to go from \"building quietly\" → \"shipping publicly\"\n\nExcited to build alongside all of you — feel free to reach out anytime 🙌"')
 ON CONFLICT (key) DO NOTHING;
